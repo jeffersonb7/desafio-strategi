@@ -13,7 +13,6 @@ import { CardMedia, Fab } from '@mui/material';
 import api from '../../services/api'
 import { useEffect, useState } from 'react';
 import { NavigateNextRounded } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom'
 
 const Home = ({ imovelSelecionado, setImovelSelecionado }) => {
     const [imoveis, setImoveis] = useState([])
@@ -34,17 +33,12 @@ const Home = ({ imovelSelecionado, setImovelSelecionado }) => {
 
     const selecionarImovel = (id) => {
         if (imovelSelecionado.id == id) {
-            setImovelSelecionado({})    
+            setImovelSelecionado({})
         } else {
             const imovel = imoveis.find((imovel) => imovel.id == id)
             setImovelSelecionado(imovel)
         }
         console.log(imovelSelecionado)
-    }
-    const history = useNavigate()
-
-    const nextStep = () => {
-        history('/clientes', { imovelSelecionado, setImovelSelecionado });
     }
 
     return (
@@ -119,7 +113,7 @@ const Home = ({ imovelSelecionado, setImovelSelecionado }) => {
                                     title={`Imagem de ${imovel.tipo}`}
                                 />
                                 <CardContent
-                                    sx={{minHeight: "100px"}}
+                                    sx={{ minHeight: "100px" }}
                                 >
                                     <Typography gutterBottom variant="h5" component="div">
                                         {imovel.tipo}
@@ -134,9 +128,9 @@ const Home = ({ imovelSelecionado, setImovelSelecionado }) => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    { imovel.id != imovelSelecionado.id ? 
+                                    {imovel.id != imovelSelecionado.id ?
                                         (<Button size="small" onClick={() => selecionarImovel(imovel.id)} variant='contained'>Selecionar Imóvel</Button>)
-                                        :                                         
+                                        :
                                         (<Button size="small" onClick={() => selecionarImovel(imovel.id)} variant='contained'>Remover Seleção Imóvel</Button>)
 
                                     }
@@ -150,13 +144,13 @@ const Home = ({ imovelSelecionado, setImovelSelecionado }) => {
             </Container>
             {
                 !(Object.keys(imovelSelecionado).length === 0) ?
-            (
-                <Box onClick={() => nextStep()} container fullWidth maxWidth="lg" sx={{ width:'100%', position: 'fixed', bottom: 10}} display='flex' justifyContent='right'>
-                <Fab color="primary" aria-label="add">
-                    <NavigateNextRounded />
-                </Fab>
-                </Box>
-            ) : ''}
+                    (
+                        <Box container fullWidth maxWidth="lg" sx={{ width: '100%', position: 'fixed', bottom: 10 }} display='flex' justifyContent='right'>
+                            <Fab color="primary" aria-label="add">
+                                <NavigateNextRounded />
+                            </Fab>
+                        </Box>
+                    ) : ''}
         </Box>
     );
 }

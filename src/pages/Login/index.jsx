@@ -25,9 +25,14 @@ const Login = () => {
   }
 
   return (
-    <Paper
-      maxWidth="500"
+    <Box
+      component="main"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      height="100vh"
     >
+    <Paper>
       <Box 
         sx={{
           display: 'flex',
@@ -82,6 +87,7 @@ const Login = () => {
         </Box>
       </Box>
     </Paper>
+    </Box>
   )
 }
 export default Login;
