@@ -23,7 +23,7 @@ const Header = () => (
         <Link
           variant="button"
           color="text.primary"
-          href="/"
+          href="/simulacao"
           sx={{ my: 1, mx: 1.5 }}
         >
           Simulações

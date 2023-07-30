@@ -45,7 +45,7 @@ const Home = ({ imovelSelecionado, setImovelSelecionado }) => {
     const history = useNavigate()
 
     const nextStep = () => {
-        history('/clientes', { imovelSelecionado, setImovelSelecionado });
+        history('/simulacao', { imovelSelecionado, setImovelSelecionado });
     }
 
     return (
