@@ -9,10 +9,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { CardMedia, Divider, Fab, FormGroup, Modal, TextField } from '@mui/material';
 import api from '../../services/api'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { NavigateNextRounded } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/index';
+import ImovelContext from '../../contexts/Imovel';
 
 const style = {
   position: 'absolute',
@@ -26,14 +27,15 @@ const style = {
   p: 4,
 };
 
-const Clientes = ({ imovelSelecionado, setImovelSelecionado, clienteSelecionado, setClienteSelecionado }) => {
+const Clientes = () => {
+  const { imovelSelecionado, clienteSelecionado, setClienteSelecionado } = useContext(ImovelContext)
   const [clientes, setClientes] = useState([])
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [openEditar, setOpenEditar] = useState(false);
-  
+
   const [id, setId] = useState('')
   const [nomeCliente, setNomeCliente] = useState('')
   const [emailCliente, setEmailCliente] = useState('')
@@ -45,13 +47,13 @@ const Clientes = ({ imovelSelecionado, setImovelSelecionado, clienteSelecionado,
 
     setId(cliente.id)
     setNomeCliente(cliente.nome)
-    setCpfCliente( cliente.cpf)
-    setEmailCliente( cliente.email)
-    setTelefoneCliente( cliente.telefone)
+    setCpfCliente(cliente.cpf)
+    setEmailCliente(cliente.email)
+    setTelefoneCliente(cliente.telefone)
 
     setOpenEditar(true);
   }
-  
+
   const handleCloseEditar = () => setOpenEditar(false);
 
   useEffect(() => {
@@ -75,7 +77,7 @@ const Clientes = ({ imovelSelecionado, setImovelSelecionado, clienteSelecionado,
 
   async function handleCadastroCliente(event) {
     event.preventDefault()
-    
+
     const dados = {
       nome: event.target[0].value,
       cpf: event.target[2].value,
@@ -96,7 +98,7 @@ const Clientes = ({ imovelSelecionado, setImovelSelecionado, clienteSelecionado,
 
   async function handleEditarCliente(event) {
     event.preventDefault()
-    
+
     const dados = {
       id: id,
       nome: nomeCliente,
@@ -117,33 +119,33 @@ const Clientes = ({ imovelSelecionado, setImovelSelecionado, clienteSelecionado,
   const handleOnChangeInput = (element, set) => {
     console.log(element.target.value)
     set(element.target.value)
-  }  
+  }
 
   const handleFiltro = (event) => {
     const filtroNome = event.target.value
     console.log(filtroNome)
     if (filtroNome) {
-      const clientesFiltrados =  clientes.filter((cliente) => cliente.nome.toUpperCase().includes(filtroNome.toUpperCase()))
+      const clientesFiltrados = clientes.filter((cliente) => cliente.nome.toUpperCase().includes(filtroNome.toUpperCase()))
       setClientes(clientesFiltrados)
       return;
-    } 
+    }
     getAllClientes()
   }
 
   const selecionarCliente = (id) => {
     if (clienteSelecionado.id == id) {
-        setClienteSelecionado({})    
+      setClienteSelecionado({})
     } else {
-        const cliente = clientes.find((cliente) => cliente.id == id)
-        setClienteSelecionado(cliente)
+      const cliente = clientes.find((cliente) => cliente.id == id)
+      setClienteSelecionado(cliente)
     }
     console.log(clienteSelecionado)
-}
-const history = useNavigate()
+  }
+  const history = useNavigate()
 
-    const nextStep = () => {
-      history('/resumoVenda', { imovelSelecionado, setImovelSelecionado, clienteSelecionado, setClienteSelecionado });
-    }
+  const nextStep = () => {
+    history('/resumoVenda', { imovelSelecionado, setImovelSelecionado, clienteSelecionado, setClienteSelecionado });
+  }
   return (
     <Box
     >
@@ -152,7 +154,7 @@ const history = useNavigate()
         sx={{ mb: 10, mt: 10 }}
       >
         <Typography variant='h5'>
-          Imovel Selecionado: 
+          Imovel Selecionado:
           Tipo: {imovelSelecionado.tipo}
           Endereco: {imovelSelecionado.endereco}
         </Typography>
@@ -197,12 +199,12 @@ const history = useNavigate()
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="medium" onClick={() => {selecionarCliente(cliente.id)}}>Selecionar o cliente</Button>
+                  <Button size="medium" onClick={() => { selecionarCliente(cliente.id) }}>Selecionar o cliente</Button>
 
                 </CardActions>
                 <CardActions>
-                  <Button size="small" onClick={() => {handleOpenEditar(cliente.id)}}>Editar</Button>
-                  <Button size="small" onClick={() => {deleteCliente(cliente.id)}} variant="outlined" color="error">Excluir</Button>
+                  <Button size="small" onClick={() => { handleOpenEditar(cliente.id) }}>Editar</Button>
+                  <Button size="small" onClick={() => { deleteCliente(cliente.id) }} variant="outlined" color="error">Excluir</Button>
                 </CardActions>
               </Card>
             </Grid>
@@ -359,16 +361,15 @@ const history = useNavigate()
           </Box>
         </Box>
       </Modal>
-
-            {
-                !(Object.keys(clienteSelecionado).length === 0) ?
-            (
-                <Box onClick={() => nextStep()} container fullWidth maxWidth="lg" sx={{ width:'100%', position: 'fixed', bottom: 10}} display='flex' justifyContent='right'>
-                <Fab color="primary" aria-label="add">
-                    <NavigateNextRounded />
-                </Fab>
-                </Box>
-        ) : ''}
+      {
+        !(Object.keys(clienteSelecionado).length === 0) ?
+          (
+            <Box onClick={() => nextStep()} container fullWidth maxWidth="lg" sx={{ width: '100%', position: 'fixed', bottom: 10 }} display='flex' justifyContent='right'>
+              <Fab color="primary" aria-label="add">
+                <NavigateNextRounded />
+              </Fab>
+            </Box>
+          ) : ''}
     </Box>
   );
 }

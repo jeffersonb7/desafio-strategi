@@ -11,12 +11,14 @@ import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
 import { CardMedia, Fab } from '@mui/material';
 import api from '../../services/api'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { NavigateNextRounded } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom'
 import Header from '../../components/Header';
+import ImovelContext from '../../contexts/Imovel';
 
-const Home = ({ imovelSelecionado, setImovelSelecionado }) => {
+const Home = () => {
+    const { imovelSelecionado, setImovelSelecionado } = useContext(ImovelContext)
     const [imoveis, setImoveis] = useState([])
 
     useEffect(() => {
@@ -42,6 +44,7 @@ const Home = ({ imovelSelecionado, setImovelSelecionado }) => {
         }
         console.log(imovelSelecionado)
     }
+    
     const history = useNavigate()
 
     const nextStep = () => {
