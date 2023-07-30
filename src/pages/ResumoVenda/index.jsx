@@ -102,7 +102,9 @@ const ResumoVenda = () => {
                             <TableRow>
                                 <TableCell>Tipo</TableCell>
                                 <TableCell align="right">Endereço</TableCell>
-                                <TableCell align="right">Valor de Venda</TableCell>
+                                <TableCell align="right">Valor da Venda</TableCell>
+                                <TableCell align="right">Parcelamento 180x</TableCell>
+                                <TableCell align="right">Valor da Comissão</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -114,7 +116,9 @@ const ResumoVenda = () => {
                                     {imovelSelecionado.tipo}
                                 </TableCell>
                                 <TableCell align="right">{imovelSelecionado.endereco}</TableCell>
-                                <TableCell align="right">{imovelSelecionado.valor_de_venda}</TableCell>
+                                <TableCell align="right">{imovelSelecionado.valorVenda}</TableCell>
+                                <TableCell align="right">R$ {(imovelSelecionado.valorParcelamento}</TableCell>
+                                <TableCell align="right">{imovelSelecionado.valorComissao}</TableCell>
                                 </TableRow>
                         </TableBody>
                     </Table>

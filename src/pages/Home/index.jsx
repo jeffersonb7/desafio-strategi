@@ -36,6 +36,7 @@ const Home = () => {
                             valor_de_venda: imovel.valor_de_venda.replace('$', '').replace(',', '').replace(',', ""),
                             valorVenda: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(imovel.valor_de_venda.replace('$', '').replace(',', '').replace(',', "")),
                             valorComissao: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(imovel.valor_de_venda.replace('$', '').replace(',', '').replace(',', "") * COMISSAO),
+                            valorParcelamento: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format((imovel.valor_de_venda.replace('$', '').replace(',', '').replace(',', "") / 180).toFixed(2))
                         }
                     }
                 )
