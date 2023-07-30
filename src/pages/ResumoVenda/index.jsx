@@ -117,7 +117,7 @@ const ResumoVenda = () => {
                                 </TableCell>
                                 <TableCell align="right">{imovelSelecionado.endereco}</TableCell>
                                 <TableCell align="right">{imovelSelecionado.valorVenda}</TableCell>
-                                <TableCell align="right">R$ {(imovelSelecionado.valorParcelamento}</TableCell>
+                                <TableCell align="right">{imovelSelecionado.valorParcelamento}</TableCell>
                                 <TableCell align="right">{imovelSelecionado.valorComissao}</TableCell>
                                 </TableRow>
                         </TableBody>
