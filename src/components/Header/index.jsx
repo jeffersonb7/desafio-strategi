@@ -1,5 +1,6 @@
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { logout } from "../../services/auth";
 
 const Header = () => (
     <AppBar
@@ -42,7 +43,11 @@ const Header = () => (
           <Link to="/resumoVenda">Resumo de Venda</Link>
         </Button>
       </nav>
-      <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+      <Button href="#" onClick={
+        () => {
+          logout()
+        }
+      } variant="outlined" sx={{ my: 1, mx: 1.5 }}>
         Logout
       </Button>
     </Toolbar>

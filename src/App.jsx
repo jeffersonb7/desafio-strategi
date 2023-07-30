@@ -11,7 +11,7 @@ import Simulacao from './pages/Simulacao'
 import ImovelContext from './contexts/Imovel'
 
 const PrivateRoute = ({ children }) => {
-  return isAuthenticated() ? children : <Navigate to="/login" />;
+  return isAuthenticated() ? children : <Navigate to="/" />;
 };
 
 const AuthenticatedRoute = ({ children }) => {
@@ -22,7 +22,7 @@ function App() {
   const [imovelSelecionado, setImovelSelecionado] = useState({})
   const [clienteSelecionado, setClienteSelecionado] = useState({})
   const [pagamentoSelecionado, setPagamentoSelecionado] = useState({})
-  
+
   return (
     <ImovelContext.Provider value={
       {
