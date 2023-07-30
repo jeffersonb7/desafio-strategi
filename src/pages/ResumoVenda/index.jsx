@@ -10,9 +10,12 @@ import api from '../../services/api'
 import Header from '../../components/Header';
 import { useContext } from 'react';
 import ImovelContext from '../../contexts/Imovel';
+import UserContext from '../../contexts/User';
 
 const ResumoVenda = () => {
     const { imovelSelecionado, clienteSelecionado } = useContext(ImovelContext)
+    const { user } = useContext(UserContext)
+
     async function handleCadastroVenda() {
         event.preventDefault()
         console.log(imovelSelecionado, clienteSelecionado)
@@ -43,6 +46,27 @@ const ResumoVenda = () => {
             <Container maxWidth="md" component="main"
                 sx={{ mb: 10, mt: 10 }}
             >
+                Vendedor
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Nome</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow
+                                key={user.nome}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {user.nome}
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
                 Cliente
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">

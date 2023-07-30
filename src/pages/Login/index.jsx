@@ -2,9 +2,12 @@ import { Box, Button, FormControlLabel, Grid, Link, Paper, TextField, Typography
 import api  from '../../services/api'
 import { login } from '../../services/auth'
 import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import UserContext from "../../contexts/User";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext)
   
   const realizarLogin = async (event) => {
     event.preventDefault()
@@ -16,7 +19,7 @@ const Login = () => {
       try {
         const response = await api.post("/login", { nome, senha });
         login(response.data.token)
-
+        setUser(response.data.dadosDoUsuario)
         navigate('/home')
       } catch (err) {
         console.log(err)

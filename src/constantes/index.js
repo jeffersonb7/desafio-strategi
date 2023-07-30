@@ -1,0 +1,1 @@
+export const COMISSAO = 0.05;

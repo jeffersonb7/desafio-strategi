@@ -9,6 +9,7 @@ import { useState } from 'react'
 import ResumoVenda from './pages/ResumoVenda'
 import Simulacao from './pages/Simulacao'
 import ImovelContext from './contexts/Imovel'
+import UserContext from './contexts/User'
 
 const PrivateRoute = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/" />;
@@ -22,8 +23,14 @@ function App() {
   const [imovelSelecionado, setImovelSelecionado] = useState({})
   const [clienteSelecionado, setClienteSelecionado] = useState({})
   const [pagamentoSelecionado, setPagamentoSelecionado] = useState({})
+  const [user, setUser] = useState({})
 
   return (
+    <UserContext.Provider value={{
+      user,
+      setUser
+    }
+    } >
     <ImovelContext.Provider value={
       {
         imovelSelecionado, setImovelSelecionado,
@@ -74,6 +81,7 @@ function App() {
         </Routes>
       </Container>
     </ImovelContext.Provider>
+    </UserContext.Provider>
   )
 }
 

@@ -22,13 +22,22 @@ const Simulacao = () => {
         >
             <Header />
             <Container maxWidth="md" component="main"
-                sx={{ mb: 10, mt: 10 }}
+                
             >
+                <Box sx={{ mb: 10, mt: 10 }}>
                 <Typography component="h1" variant="h5">
                     Forma de pagamento
                 </Typography>
+                </Box>
 
-                Dados do imóvel
+                <Typography
+          sx={{ flex: '1 1 100%', mb: 1 }}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
+          Dados do Imóvel
+        </Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
@@ -36,6 +45,9 @@ const Simulacao = () => {
                                 <TableCell>Tipo</TableCell>
                                 <TableCell align="right">Endereço</TableCell>
                                 <TableCell align="right">Valor de Venda</TableCell>
+                                <TableCell align="right">Parcelamento 180x</TableCell>
+                                <TableCell align="right">Valor de Comissao</TableCell>
+
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -47,16 +59,20 @@ const Simulacao = () => {
                                     {imovelSelecionado.tipo}
                                 </TableCell>
                                 <TableCell align="right">{imovelSelecionado.endereco}</TableCell>
-                                <TableCell align="right">{imovelSelecionado.valor_de_venda}</TableCell>
+                                <TableCell align="right">{imovelSelecionado.valorVenda}</TableCell>
+                                <TableCell align="right">R$ {(imovelSelecionado.valor_de_venda / 180).toFixed(2)}</TableCell>
+                                <TableCell align="right">{imovelSelecionado.valorComissao}</TableCell>
+
                                 </TableRow>
                         </TableBody>
                     </Table>
                 </TableContainer>
 
-                <Box componenet="container" noValidate sx={{ mt: 1 }}>
+                <Box componenet="container" noValidate sx={{ mt: 3 }}>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Forma de pagamento</InputLabel>
                         <Select
+                        required
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={pagamento}
@@ -73,7 +89,7 @@ const Simulacao = () => {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                         onClick={() => history('/clientes')}
-                                            >
+                    >
                         Selecionar o cliente
                     </Button>
                 </Box>

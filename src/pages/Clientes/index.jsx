@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { CardMedia, Divider, Fab, FormGroup, Modal, TextField } from '@mui/material';
+import { CardMedia, Divider, Fab, FormGroup, Modal, Paper, TextField } from '@mui/material';
 import api from '../../services/api'
 import { useContext, useEffect, useState } from 'react';
 import { NavigateNextRounded } from '@mui/icons-material';
@@ -153,14 +153,16 @@ const Clientes = () => {
       <Container maxWidth="md" component="main"
         sx={{ mb: 10, mt: 10 }}
       >
-        <Typography variant='h5'>
-          Imovel Selecionado:
-          Tipo: {imovelSelecionado.tipo}
-          Endereco: {imovelSelecionado.endereco}
-        </Typography>
+        <Paper variant='outlined' sx={{ mt: 3, mb: 3 }}>
+          <Typography variant='h5'>Imovel Selecionado: </Typography>
+          <Typography component='p'> Tipo: {imovelSelecionado.tipo}</Typography>
+          <Typography component='p'>Endereco: {imovelSelecionado.endereco}
+          </Typography>
+
+        </Paper>
         <FormGroup container spacing={0}>
           <TextField id="outlined-basic" onChange={handleFiltro} label="Procurar um nome..." variant="outlined" />
-          <Button onClick={handleOpen}>Cadastrar um cliente</Button>
+          <Button sx={{ mt: 2, mb: 2 }} variant='outlined' onClick={handleOpen}>Cadastrar um cliente</Button>
         </FormGroup>
         <Grid container spacing={5} alignItems="flex-end">
           {clientes.map((cliente) => (
@@ -199,10 +201,10 @@ const Clientes = () => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  { 
-                      cliente.id != clienteSelecionado.id ? 
+                  {
+                    cliente.id != clienteSelecionado.id ?
                       (<Button color="primary" size="small" onClick={() => selecionarCliente(cliente.id)} variant='contained'>Selecionar Imóvel</Button>)
-                      :                                         
+                      :
                       (<Button color="error" size="small" onClick={() => selecionarCliente(cliente.id)} variant='contained'>Remover Seleção Cliente</Button>)
 
                   }

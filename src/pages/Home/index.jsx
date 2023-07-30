@@ -16,6 +16,7 @@ import { NavigateNextRounded } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom'
 import Header from '../../components/Header';
 import ImovelContext from '../../contexts/Imovel';
+import { COMISSAO } from '../../constantes';
 
 const Home = () => {
     const { imovelSelecionado, setImovelSelecionado } = useContext(ImovelContext)
@@ -29,8 +30,17 @@ const Home = () => {
         api.get('/imoveis').then(
             (response) => {
                 const allImoveis = response.data.success
-                console.log(allImoveis)
-                setImoveis(allImoveis)
+                const allImoveisConvertValor = allImoveis.map((imovel) => {
+                        return {
+                            ...imovel,  
+                            valor_de_venda: imovel.valor_de_venda.replace('$', '').replace(',', '').replace(',', ""),
+                            valorVenda: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(imovel.valor_de_venda.replace('$', '').replace(',', '').replace(',', "")),
+                            valorComissao: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(imovel.valor_de_venda.replace('$', '').replace(',', '').replace(',', "") * COMISSAO),
+                        }
+                    }
+                )
+                console.log(allImoveisConvertValor)
+                setImoveis(allImoveisConvertValor)
             }
         ).catch(error => console.error('Error'))
     }
@@ -86,7 +96,11 @@ const Home = () => {
                                 </CardContent>
                                 <CardContent>
                                     <Typography variant="body1" color="text.primary">
-                                        {imovel.valor_de_venda}
+                                    Valor da Venda: {imovel.valorVenda}
+                                    </Typography>
+
+                                    <Typography variant="body1" color="text.primary">
+                                        Valor da Comissão: {imovel.valorComissao}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
