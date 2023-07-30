@@ -1,14 +1,15 @@
-import { Box, Button, FormControlLabel, Grid, Link, Paper, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, FormControlLabel, Grid, Link, Paper, TextField, Typography } from "@mui/material";
 import api  from '../../services/api'
 import { login } from '../../services/auth'
 import { useNavigate } from 'react-router-dom';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import UserContext from "../../contexts/User";
 
 const Login = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext)
-  
+  const [toast, setToast] = useState(false)
+
   const realizarLogin = async (event) => {
     event.preventDefault()
     
@@ -20,9 +21,10 @@ const Login = () => {
         const response = await api.post("/login", { nome, senha });
         login(response.data.token)
         setUser(response.data.dadosDoUsuario)
+        
         navigate('/home')
       } catch (err) {
-        console.log(err)
+        setToast("Username or senha inválida")
       }
     }
   }
@@ -68,17 +70,6 @@ const Login = () => {
             id="password"
             autoComplete="current-password"
           />
-
-          {/*
-          <FormControlLabel
-            control={
-             <Checkbox value="remember" color="primary" />
-          }
-
-          
-            label="Remember me"
-          />
-          */}
           <Button
             type="submit"
             fullWidth
@@ -90,6 +81,18 @@ const Login = () => {
         </Box>
       </Box>
     </Paper>
+
+    {
+      toast && 
+
+      <Box maxWidth="lg" sx={{ width: '100%', position: 'fixed', bottom: 10 }} display='flex' justifyContent='left'>
+        <Alert variant="filled" severity="error">
+          {toast}
+        </Alert>
+    </Box>
+    }
+
+
     </Box>
   )
 }

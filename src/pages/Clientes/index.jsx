@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { CardMedia, Divider, Fab, FormGroup, Modal, Paper, TextField } from '@mui/material';
+import { Alert, CardMedia, Divider, Fab, FormGroup, Modal, Paper, TextField } from '@mui/material';
 import api from '../../services/api'
 import { useContext, useEffect, useState } from 'react';
 import { NavigateNextRounded } from '@mui/icons-material';
@@ -30,6 +30,7 @@ const style = {
 const Clientes = () => {
   const { imovelSelecionado, clienteSelecionado, setClienteSelecionado } = useContext(ImovelContext)
   const [clientes, setClientes] = useState([])
+  const [toast, setToast] = useState(false)
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -64,7 +65,6 @@ const Clientes = () => {
     api.get('/clientes').then(
       (response) => {
         const allClientes = response.data.success
-        console.log(allClientes)
         setClientes(allClientes)
       }
     ).catch(error => console.error('Error'))
@@ -92,8 +92,12 @@ const Clientes = () => {
   }
 
   const cadastrarCliente = async (dados) => {
-    const response = await api.post('/cliente-cadastro/', dados);
-    console.log(response)
+    try {
+      const response = await api.post('/cliente-cadastro/', dados);
+      setToast("Cadastro completo")
+    } catch {
+
+    }
   }
 
   async function handleEditarCliente(event) {
@@ -117,13 +121,11 @@ const Clientes = () => {
   }
 
   const handleOnChangeInput = (element, set) => {
-    console.log(element.target.value)
     set(element.target.value)
   }
 
   const handleFiltro = (event) => {
     const filtroNome = event.target.value
-    console.log(filtroNome)
     if (filtroNome) {
       const clientesFiltrados = clientes.filter((cliente) => cliente.nome.toUpperCase().includes(filtroNome.toUpperCase()))
       setClientes(clientesFiltrados)
@@ -139,7 +141,6 @@ const Clientes = () => {
       const cliente = clientes.find((cliente) => cliente.id == id)
       setClienteSelecionado(cliente)
     }
-    console.log(clienteSelecionado)
   }
   const history = useNavigate()
 
@@ -160,7 +161,7 @@ const Clientes = () => {
           </Typography>
 
         </Paper>
-        <FormGroup container spacing={0}>
+        <FormGroup spacing={0}>
           <TextField id="outlined-basic" onChange={handleFiltro} label="Procurar um nome..." variant="outlined" />
           <Button sx={{ mt: 2, mb: 2 }} variant='outlined' onClick={handleOpen}>Cadastrar um cliente</Button>
         </FormGroup>
@@ -371,12 +372,22 @@ const Clientes = () => {
       {
         !(Object.keys(clienteSelecionado).length === 0) ?
           (
-            <Box onClick={() => nextStep()} container fullWidth maxWidth="lg" sx={{ width: '100%', position: 'fixed', bottom: 10 }} display='flex' justifyContent='right'>
+            <Box onClick={() => nextStep()} maxWidth="lg" sx={{ width: '100%', position: 'fixed', bottom: 10 }} display='flex' justifyContent='right'>
               <Fab color="primary" aria-label="add">
                 <NavigateNextRounded />
               </Fab>
             </Box>
           ) : ''}
+
+      {
+        toast &&
+
+        <Box maxWidth="lg" sx={{ width: '100%', position: 'fixed', bottom: 10 }} display='flex' justifyContent='left'>
+          <Alert variant="filled" severity="success">
+            {toast}
+          </Alert>
+        </Box>
+      }
     </Box>
   );
 }

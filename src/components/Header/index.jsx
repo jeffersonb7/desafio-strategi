@@ -1,8 +1,11 @@
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../services/auth";
 
-const Header = () => (
+const Header = () => {
+  const history = useNavigate()
+
+  return (
     <AppBar
     position="static"
     color="default"
@@ -46,12 +49,14 @@ const Header = () => (
       <Button href="#" onClick={
         () => {
           logout()
+          history('/')
         }
       } variant="outlined" sx={{ my: 1, mx: 1.5 }}>
         Logout
       </Button>
     </Toolbar>
   </AppBar>
-)
+  )
+}
 
 export default Header
