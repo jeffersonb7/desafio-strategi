@@ -8,9 +8,11 @@ import Container from '@mui/material/Container';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
 import api from '../../services/api'
 import Header from '../../components/Header';
+import { useContext } from 'react';
+import ImovelContext from '../../contexts/Imovel';
 
-const ResumoVenda = ({ imovelSelecionado, setImovelSelecionado, clienteSelecionado, setClienteSelecionado }) => {
-
+const ResumoVenda = () => {
+    const { imovelSelecionado, clienteSelecionado } = useContext(ImovelContext)
     async function handleCadastroVenda() {
         event.preventDefault()
         console.log(imovelSelecionado, clienteSelecionado)

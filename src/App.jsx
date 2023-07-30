@@ -5,7 +5,7 @@ import Home from './pages/Home/index'
 import { Container } from '@mui/material'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { isAuthenticated } from './services/auth'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import ResumoVenda from './pages/ResumoVenda'
 import Simulacao from './pages/Simulacao'
 import ImovelContext from './contexts/Imovel'
@@ -13,6 +13,10 @@ import ImovelContext from './contexts/Imovel'
 const PrivateRoute = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/login" />;
 };
+
+const AuthenticatedRoute = ({ children }) => {
+  return !isAuthenticated() ? children: <Navigate to="/home" />;
+}
 
 function App() {
   const [imovelSelecionado, setImovelSelecionado] = useState({})
@@ -31,7 +35,11 @@ function App() {
     }>
       <Container maxWidth="lg">
         <Routes>
-          <Route path="/" exact element={<Login />} />
+          <Route path="/" exact element={
+            <AuthenticatedRoute>
+              <Login />
+            </AuthenticatedRoute>
+          } />
           <Route
             path="/home"
             element={
@@ -52,10 +60,7 @@ function App() {
             path="/resumoVenda"
             element={
               <PrivateRoute>
-                <ResumoVenda
-                  imovelSelecionado={imovelSelecionado} setImovelSelecionado={setImovelSelecionado}
-                  clienteSelecionado={clienteSelecionado} setClienteSelecionado={setClienteSelecionado}
-                />
+                <ResumoVenda />
               </PrivateRoute>
             }
           />
@@ -63,10 +68,7 @@ function App() {
             path="/simulacao"
             element={
               <PrivateRoute>
-                <Simulacao
-                  imovelSelecionado={imovelSelecionado} setImovelSelecionado={setImovelSelecionado}
-                  clienteSelecionado={clienteSelecionado} setClienteSelecionado={setClienteSelecionado}
-                />
+                <Simulacao />
               </PrivateRoute>
             }
           />
