@@ -5,15 +5,14 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
 import { CardMedia, Divider, Fab, FormGroup, Modal, TextField } from '@mui/material';
 import api from '../../services/api'
 import { useEffect, useState } from 'react';
 import { NavigateNextRounded } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import Header from '../../components/Header/index';
 
 const style = {
   position: 'absolute',
@@ -148,59 +147,10 @@ const history = useNavigate()
   return (
     <Box
     >
-      <AppBar
-        position="static"
-        color="default"
-        elevation={0}
-        sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
-      >
-        <Toolbar sx={{ flexWrap: 'wrap' }}>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            Imoveiz
-          </Typography>
-          <nav>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="/home"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Imoveis
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Simulações
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="/clientes"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Clientes
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Resumo de Venda
-            </Link>
-          </nav>
-          <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-            Logout
-          </Button>
-        </Toolbar>
-      </AppBar>
+      <Header />
       <Container maxWidth="md" component="main"
         sx={{ mb: 10, mt: 10 }}
       >
-
         <Typography variant='h5'>
           Imovel Selecionado: 
           Tipo: {imovelSelecionado.tipo}
@@ -212,7 +162,6 @@ const history = useNavigate()
         </FormGroup>
         <Grid container spacing={5} alignItems="flex-end">
           {clientes.map((cliente) => (
-            // Enterprise card is full width at sm breakpoint
             <Grid
               item
               key={cliente.id}

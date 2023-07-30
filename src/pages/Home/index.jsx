@@ -14,6 +14,7 @@ import api from '../../services/api'
 import { useEffect, useState } from 'react';
 import { NavigateNextRounded } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom'
+import Header from '../../components/Header';
 
 const Home = ({ imovelSelecionado, setImovelSelecionado }) => {
     const [imoveis, setImoveis] = useState([])
@@ -50,55 +51,7 @@ const Home = ({ imovelSelecionado, setImovelSelecionado }) => {
     return (
         <Box
         >
-            <AppBar
-                position="static"
-                color="default"
-                elevation={0}
-                sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
-            >
-                <Toolbar sx={{ flexWrap: 'wrap' }}>
-                    <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-                        Imoveiz
-                    </Typography>
-                    <nav>
-                        <Link
-                            variant="button"
-                            color="text.primary"
-                            href="#"
-                            sx={{ my: 1, mx: 1.5 }}
-                        >
-                            Imoveis
-                        </Link>
-                        <Link
-                            variant="button"
-                            color="text.primary"
-                            href="#"
-                            sx={{ my: 1, mx: 1.5 }}
-                        >
-                            Simulações
-                        </Link>
-                        <Link
-                            variant="button"
-                            color="text.primary"
-                            href="#"
-                            sx={{ my: 1, mx: 1.5 }}
-                        >
-                            Clientes
-                        </Link>
-                        <Link
-                            variant="button"
-                            color="text.primary"
-                            href="#"
-                            sx={{ my: 1, mx: 1.5 }}
-                        >
-                            Resumo de Venda
-                        </Link>
-                    </nav>
-                    <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-                        Logout
-                    </Button>
-                </Toolbar>
-            </AppBar>
+            <Header />
             <Container maxWidth="md" component="main"
                 sx={{ mb: 10, mt: 10 }}
             >
