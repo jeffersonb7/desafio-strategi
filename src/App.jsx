@@ -22,9 +22,7 @@ function App() {
   const [imovelSelecionado, setImovelSelecionado] = useState({})
   const [clienteSelecionado, setClienteSelecionado] = useState({})
   const [pagamentoSelecionado, setPagamentoSelecionado] = useState({})
-
-  console.log("asasdasd")
-
+  
   return (
     <ImovelContext.Provider value={
       {
