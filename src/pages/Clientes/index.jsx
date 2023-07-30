@@ -144,7 +144,7 @@ const Clientes = () => {
   const history = useNavigate()
 
   const nextStep = () => {
-    history('/resumoVenda', { imovelSelecionado, setImovelSelecionado, clienteSelecionado, setClienteSelecionado });
+    history('/resumoVenda');
   }
   return (
     <Box
@@ -199,8 +199,13 @@ const Clientes = () => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="medium" onClick={() => { selecionarCliente(cliente.id) }}>Selecionar o cliente</Button>
+                  { 
+                      cliente.id != clienteSelecionado.id ? 
+                      (<Button color="primary" size="small" onClick={() => selecionarCliente(cliente.id)} variant='contained'>Selecionar Imóvel</Button>)
+                      :                                         
+                      (<Button color="error" size="small" onClick={() => selecionarCliente(cliente.id)} variant='contained'>Remover Seleção Cliente</Button>)
 
+                  }
                 </CardActions>
                 <CardActions>
                   <Button size="small" onClick={() => { handleOpenEditar(cliente.id) }}>Editar</Button>

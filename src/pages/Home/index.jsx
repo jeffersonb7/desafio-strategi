@@ -44,7 +44,7 @@ const Home = () => {
         }
         console.log(imovelSelecionado)
     }
-    
+
     const history = useNavigate()
 
     const nextStep = () => {
@@ -90,14 +90,13 @@ const Home = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    { imovel.id != imovelSelecionado.id ? 
-                                        (<Button size="small" onClick={() => selecionarImovel(imovel.id)} variant='contained'>Selecionar Imóvel</Button>)
+                                    { 
+                                        imovel.id != imovelSelecionado.id ? 
+                                        (<Button color="primary" size="small" onClick={() => selecionarImovel(imovel.id)} variant='contained'>Selecionar Imóvel</Button>)
                                         :                                         
-                                        (<Button size="small" onClick={() => selecionarImovel(imovel.id)} variant='contained'>Remover Seleção Imóvel</Button>)
+                                        (<Button color="error" size="small" onClick={() => selecionarImovel(imovel.id)} variant='contained'>Remover Seleção Imóvel</Button>)
 
                                     }
-                                    {/* <Button size="small">Editar</Button> */}
-                                    {/* <Button size="small" variant="outlined" color="error">Excluir</Button> */}
                                 </CardActions>
                             </Card>
                         </Grid>
