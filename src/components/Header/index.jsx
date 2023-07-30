@@ -1,4 +1,5 @@
-import { AppBar, Button, Link, Toolbar, Typography } from "@mui/material";
+import { AppBar, Button, Toolbar, Typography, Link as LinkButton } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Header = () => (
     <AppBar
@@ -12,38 +13,34 @@ const Header = () => (
         Imoveiz
       </Typography>
       <nav>
-        <Link
+        <LinkButton
           variant="button"
           color="text.primary"
-          href="/home"
           sx={{ my: 1, mx: 1.5 }}
         >
-          Imoveis
-        </Link>
-        <Link
+          <Link to="/home">Imóveis</Link>
+        </LinkButton>
+        <LinkButton
           variant="button"
           color="text.primary"
-          href="/simulacao"
           sx={{ my: 1, mx: 1.5 }}
         >
-          Simulações
-        </Link>
-        <Link
+          <Link to="/simulacao">Simulação</Link>
+        </LinkButton>
+        <LinkButton
           variant="button"
           color="text.primary"
-          href="/clientes"
           sx={{ my: 1, mx: 1.5 }}
         >
-          Clientes
-        </Link>
-        <Link
+          <Link to="/clientes">Clientes</Link>
+        </LinkButton>
+        <LinkButton
           variant="button"
           color="text.primary"
-          href="/resumoVenda"
           sx={{ my: 1, mx: 1.5 }}
-        >
-          Resumo de Venda
-        </Link>
+        >          
+          <Link to="/resumoVenda">Resumo de Venda</Link>
+        </LinkButton>
       </nav>
       <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
         Logout
