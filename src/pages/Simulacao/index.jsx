@@ -3,17 +3,18 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { FormControl, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Header from '../../components/Header';
 import { useNavigate } from 'react-router-dom';
 import ImovelContext from '../../contexts/Imovel';
 
 const Simulacao = () => {
-    const { imovelSelecionado, setImovelSelecionado, clienteSelecionado, setClienteSelecionado} = useContext(ImovelContext)
-    const [pagamento, setPagamento] = useState('')
+    const { imovelSelecionado ,pagamentoSelecionado: pagamento, setPagamentoSelecionado: setPagamento } = useContext(ImovelContext)
+    
     const handleChange = (event) => {
         setPagamento(event.target.value);
       };
+
       const history = useNavigate()
 
     return (
