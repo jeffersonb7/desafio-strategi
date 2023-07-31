@@ -22,7 +22,7 @@ Assim todas as rotas do projeto foram utilizada com base nesse back-end.
     npm run dev
 ```
 
-O projeto execurá na rota 3000: [http://localhost:3000](http://localhost:3000)
+O projeto execurá na rota 3000: [http://127.0.0.1:5173](http://127.0.0.1:5173/)
 
 ### Tecnologias utilizadas
 - [MUI Core](https://mui.com/)
